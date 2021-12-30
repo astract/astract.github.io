@@ -66,3 +66,12 @@ button:active {
     color: hsla(0, 0%, 100%, 0.6);
     text-align: center;
 }
+
+.button-secondary {
+    padding: 13px;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+}

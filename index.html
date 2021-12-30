@@ -14,7 +14,16 @@
         <span class="caption">Click to copy</span>
     </div>
     <div class="buttonWithCaption">
-        <button alt="Generate random color" type="button" onclick="createGradientByRGB()">Generate other</button>
+        <div class="actions">
+            <button alt="Generate random color" type="button" onclick="createGradientByRGB()" class="button-primary-text">Generate other</button>
+            <button alt="Copy code gradient for CSS" class="button-secondary">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M4.8 1.5C3.6402 1.5 2.7 2.4402 2.7 3.6V15.6C2.7 16.7598 3.6402 17.7 4.8 17.7H7.5V20.4C7.5 21.5598 8.4402 22.5 9.6 22.5H19.2C20.3598 22.5 21.3 21.5598 21.3 20.4V8.4C21.3 7.2402 20.3598 6.3 19.2 6.3H16.5V3.6C16.5 2.4402 15.5598 1.5 14.4 1.5H4.8ZM16.5 8.1V15.6C16.5 16.7598 15.5598 17.7 14.4 17.7H9.3V20.4C9.3 20.5657 9.43431 20.7 9.6 20.7H19.2C19.3657 20.7 19.5 20.5657 19.5 20.4V8.4C19.5 8.23431 19.3657 8.1 19.2 8.1H16.5ZM4.5 3.6C4.5 3.43431 4.63431 3.3 4.8 3.3H14.4C14.5657 3.3 14.7 3.43431 14.7 3.6V15.6C14.7 15.7657 14.5657 15.9 14.4 15.9H4.8C4.63431 15.9 4.5 15.7657 4.5 15.6V3.6Z"
+                        fill="white" />
+                </svg>
+            </button>
+        </div>
         <span class="caption">Click button or just press "Space" button</span>
     </div>
     <div onclick="copyHexValue('color_value_bottom')" class="hex_click_zone">
@@ -25,7 +34,7 @@
         createGradientByRGB();
 
         // Generate gradient by click "space" button
-        window.addEventListener('keydown', function(createGradientBySpace) {
+        window.addEventListener('keydown', function (createGradientBySpace) {
             if (createGradientBySpace.keyCode == 32) {
                 createGradientByRGB();
             }
