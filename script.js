@@ -1,57 +1,61 @@
-// Create a function for make gradient for background
+// Функция создаёт два случайных цвета и устанавливает их как градиент
 function createGradientByRGB() {
-    let root = document.querySelector(':root');
+    // Получаем корень страницы (где хранятся CSS-переменные)
+    let root = document.documentElement;
 
-    let rColor; // Red color
-    let gColor; // Green color
-    let bColor; // Blue color
-    let arrayColors = []; // array for save two color values
+    // Массив для хранения двух цветов (в формате #rrggbb)
+    let colors = [];
 
+    // Генерируем два цвета
     for (let i = 0; i < 2; i++) {
-        // generate random value for RGB system in 16 code system
-        rColor = Math.floor(Math.random() * 255).toString(16);
-        gColor = Math.floor(Math.random() * 255).toString(16);
-        bColor = Math.floor(Math.random() * 255).toString(16);
+        // Генерируем случайные значения от 0 до 255 для красного, зелёного и синего
+        let r = Math.floor(Math.random() * 256);
+        let g = Math.floor(Math.random() * 256);
+        let b = Math.floor(Math.random() * 256);
 
-        // check color value on one symbols and add 0 before
-        if (rColor.length == 1) {
-            rColor = 0 + rColor;
-        }
+        // Преобразуем в шестнадцатеричную систему (например, 'ff')
+        let rHex = r.toString(16).padStart(2, '0'); // если однозначное — добавим 0 спереди
+        let gHex = g.toString(16).padStart(2, '0');
+        let bHex = b.toString(16).padStart(2, '0');
 
-        if (gColor.length == 1) {
-            gColor = 0 + gColor;
-        }
+        // Собираем цвет и добавляем решётку (#)
+        let color = '#' + rHex + gHex + bHex;
 
-        if (bColor.length == 1) {
-            bColor = 0 + bColor;
-        }
-
-        arrayColors.push(rColor + gColor + bColor);
-        console.log(arrayColors);
+        // Добавляем цвет в массив
+        colors.push(color);
     }
 
-    root.style.setProperty('--color_top', ('#' + arrayColors[0]));
-    root.style.setProperty('--color_bottom', ('#' + arrayColors[1]));
+    // Устанавливаем цвета в CSS-переменные
+    root.style.setProperty('--color_top', colors[0]);
+    root.style.setProperty('--color_bottom', colors[1]);
 
-    color_value_top.innerHTML = arrayColors[0];
-    color_value_bottom.innerHTML = arrayColors[1];
+    // Обновляем текст на экране (без # и в верхнем регистре)
+    color_value_top.textContent = colors[0].substring(1).toUpperCase();
+    color_value_bottom.textContent = colors[1].substring(1).toUpperCase();
 }
 
-// Click on Hex value for copy value
+// Функция копирует текст при клике
 function copyHexValue(id) {
-    navigator.clipboard.writeText(document.getElementById(id).textContent)
+    // Находим элемент по id
+    let element = document.getElementById(id);
+
+    // Получаем текст из него (например, "FF5733")
+    let textToCopy = element.textContent;
+
+    // Копируем в буфер обмена
+    navigator.clipboard.writeText(textToCopy)
         .then(() => {
-            let setValue = document.getElementById(id).textContent;
-            document.getElementById(id).innerHTML = "Copied";
-            setTimeout(function () {
-                document.getElementById(id).innerHTML = setValue;
+            // Если успешно — пишем "Copied" на 0.3 секунды
+            element.textContent = "Copied";
+            setTimeout(() => {
+                element.textContent = textToCopy;
             }, 300);
         })
         .catch(err => {
-            let setValue = document.getElementById(id).textContent;
-            document.getElementById(id).innerHTML = "Ooops.. Please retry";
-            setTimeout(function () {
-                document.getElementById(id).innerHTML = setValue;
+            // Если ошибка — показываем сообщение на 1 секунду
+            element.textContent = "Ошибка";
+            setTimeout(() => {
+                element.textContent = textToCopy;
             }, 1000);
         });
 }
