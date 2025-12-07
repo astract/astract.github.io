@@ -20,11 +20,19 @@
             <button
                 alt="Generate random color"
                 type="button"
-                onclick="createGradientByRGB()"
+                onclick="applyColorsToCSS()"
             >
                 Generate
             </button>
             <span class="caption">or just press "Space" button</span>
+        </div>
+        <div 
+            id="previous_gradient" 
+            class="previous_gradient"
+            onclick="restorePreviousGradient()"
+            title="Click to restore previous gradient"
+        >
+            <span class="previous_gradient_caption">Previous</span>
         </div>
         <div
             onclick="copyHexValue('color_value_bottom')"
@@ -38,14 +46,13 @@
             <span class="caption">Click to copy</span>
         </div>
         <script>
-            createGradientByRGB();
-
+            applyColorsToCSS();
             // Generate gradient by click "space" button
             window.addEventListener(
                 "keydown",
                 function (createGradientBySpace) {
                     if (createGradientBySpace.keyCode == 32) {
-                        createGradientByRGB();
+                        applyColorsToCSS();
                     }
                 },
             );
